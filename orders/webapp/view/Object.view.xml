@@ -1,0 +1,93 @@
+<mvc:View
+	controllerName="bournedigital.orders.controller.Object"
+	xmlns="sap.m"
+	xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+
+		<semantic:titleExpandedContent>
+			<layout:HorizontalLayout allowWrapping="true">
+				<layout:VerticalLayout class="sapUiMediumMarginEnd">		
+					<Title text="{Customer/CompanyName}" level="Auto"/>
+				</layout:VerticalLayout>
+				<layout:VerticalLayout class="sapUiMediumMarginEnd">
+					<Text text="Order ID : {OrderID}"/>
+				</layout:VerticalLayout>
+			</layout:HorizontalLayout>
+		</semantic:titleExpandedContent>
+
+
+		<semantic:headerContent>
+			<layout:HorizontalLayout allowWrapping="true">
+				<layout:VerticalLayout class="sapUiMediumMarginEnd">
+					<ObjectAttribute title="Contact Name" text="{Customer/ContactName}"/>
+					<ObjectAttribute title="Contact Title" text="{Customer/ContactTitle}"/>
+					<ObjectAttribute title="Phone" text="{Customer/Phone}"/>
+				</layout:VerticalLayout>
+
+				<layout:VerticalLayout class="sapUiMediumMarginEnd">
+					<ObjectAttribute title="Address" text="{Customer/Address}"/>
+					<ObjectAttribute title="Postal Code" text="{Customer/PostalCode}"/>
+					<ObjectAttribute title="Country" text="{Customer/Country}"/>
+				</layout:VerticalLayout>
+
+				<layout:VerticalLayout>
+					<Label text="Total Value:"/>
+					<ObjectNumber number="{Freight}" numberUnit="AUD"/>
+				</layout:VerticalLayout>
+
+			</layout:HorizontalLayout>
+		</semantic:headerContent>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<!-- Content -->
+		<semantic:content>
+			<Table
+				id="idOrderItems"
+				inset="false"
+				items="{path:'Order_Details'}"
+				class="sapFSemanticPageAlignContent"
+				width="auto">
+
+				<columns>
+					<Column>
+						<Text text="Product ID"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="Unit Price"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="Quantity"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="Discount"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							<Text text="{ProductID}"/>
+							<Text text="{UnitPrice}"/>
+							<Text text="{Quantity}"/>
+							<Text text="{Discount}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>
